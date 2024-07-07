@@ -295,6 +295,8 @@ class InteractiveGallery extends StatefulWidget {
   /// The width of the miniatures images.
   final double miniatureWidth;
 
+  final VoidCallback? callback;
+
   const InteractiveGallery({
     super.key,
     required this.imageList,
@@ -311,6 +313,7 @@ class InteractiveGallery extends StatefulWidget {
     this.miniatureWidth = 20,
     this.singleTapBottomsheetWidget,
     this.longTapBottomsheetWidget,
+    this.callback,
   });
 
   @override
@@ -492,9 +495,10 @@ class _InteractiveGalleryState extends State<InteractiveGallery>
                                   const BorderRadius.all(Radius.circular(50))),
                           child: IconButton(
                             icon: const Icon(Icons.close, color: Colors.white),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
+                            onPressed: widget.callback ??
+                                () {
+                                  Navigator.pop(context);
+                                },
                           ),
                         ),
                       )
